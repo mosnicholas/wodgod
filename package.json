@@ -1,0 +1,34 @@
+{
+  "name": "wod_god",
+  "version": "1.0.0",
+  "description": "Wodify signin app",
+  "main": "app.js",
+  "scripts": {
+    "build": "babel src --out-dir build",
+    "serve": "node build/app.js",
+    "start": "nodemon --exec babel-node src/app.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mosnicholas/wodgod.git"
+  },
+  "author": "mosnicholas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mosnicholas/wodgod/issues"
+  },
+  "homepage": "https://github.com/mosnicholas/wodgod#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1"
+  }
+}
