@@ -7,6 +7,7 @@
     "build": "babel src --out-dir build",
     "serve": "babel-node build/app.js",
     "start": "nodemon --exec babel-node src/app.js",
+    "now-build": "npm run build && npm run serve",
     "test": "test"
   },
   "repository": {
