@@ -1,59 +1,69 @@
 import cheerio from "cheerio";
 import axios from "axios";
+import fs from "fs";
+import path from "path";
 
 import stringifyCookie from "./stringifyCookie";
-import { todaysSchedule, formData } from "./constants";
+import {
+  wodCookie,
+  todaysSchedule,
+  formData,
+  tmpFormValueFilename,
+  BOWERY_CROSSFIT_GYM_NAME
+} from "./constants";
 
 const getTodaysWod = async () => {
-  const result = await axios.post(todaysSchedule, formData, {
+  const result = await axios.get(todaysSchedule, {
     headers: {
-      Cookie: stringifyCookie(),
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      Cookie: stringifyCookie(wodCookie)
     },
     withCredentials: true
   });
-  console.log("result.request: ", result.request);
   const $ = cheerio.load(result.data);
-  console.log($(".TableRecords_OddLine,.TableRecords_EvenLine").text());
-  // const wodData = $("#");
-  // const titles = wodData.find(".section_title");
-  // const names = wodData.find(".component_name");
-  // const workouts = wodData.find(".component_wrapper");
+  const OSVSTATE = $("input#__OSVSTATE").val();
+  const VIEWSTATEGENERATOR = $("input#__VIEWSTATEGENERATOR").val();
 
-  // const wods = Array.from({ length: titles.length }, () => ({
-  //   title: "",
-  //   wodName: "",
-  //   workout: ""
-  // }));
+  // Persist form values for form submission
+  fs.writeFileSync(
+    tmpFormValueFilename,
+    `{__OSVSTATE: ${OSVSTATE}, VIEWSTATEGENERATOR: ${VIEWSTATEGENERATOR}}`,
+    "utf8"
+  );
 
-  // titles.each(function(i) {
-  //   const sectionTitle = $(this).text();
-  //   wods[i]["title"] = sectionTitle;
-  // });
+  const wodSchedule = $("tr");
+  const bowerySchedule = wodSchedule.filter(function() {
+    return (
+      $(this)
+        .find("span.Text_Note")
+        .first()
+        .text() == BOWERY_CROSSFIT_GYM_NAME
+    );
+  });
 
-  // names.each(function(i) {
-  //   const wodName = $(this).text();
-  //   wods[i]["wodName"] = wodName;
-  // });
+  const schedulesObject = Array.from({ length: bowerySchedule.length }, () => ({
+    time: "",
+    isOpenGym: false,
+    instructor: "",
+    numberSignUps: ""
+  }));
 
-  // workouts.each(function(i) {
-  //   const workout = $(this)
-  //     .html()
-  //     .replace(/<br>/g, " ")
-  //     .replace(/  /g, "\n");
-  //   if (workout) {
-  //     wods[i]["workout"] = workout;
-  //   }
-  // });
+  bowerySchedule.each(function(i) {
+    const scheduleHTML = $(this);
+    const spans = scheduleHTML.find("span");
+    const numberSignUps = spans.last().text();
+    const instructor = scheduleHTML
+      .find("span.Text_Note")
+      .last()
+      .text();
+    schedulesObject[i] = {
+      time: spans.first().text(),
+      isOpenGym: instructor === "",
+      instructor,
+      numberSignUps
+    };
+  });
 
-  // wods.forEach(w => {
-  //   if (w.wodName && !w.workout) {
-  //     w.workout = w.wodName;
-  //     w.wodName = "";
-  //   }
-  // });
-
-  return true;
+  return schedulesObject;
 };
 
 export default getTodaysWod;

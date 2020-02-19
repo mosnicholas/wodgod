@@ -1,11 +1,8 @@
 export const todaysWODUrl =
-  "https://app.wodify.com/Mobile/?isPhoneGap=True&uuid=1eb96512ff049337863ca8e0a1be9ed3aad85b1590dada74a9c4703059761ad1&device_platform=iOS&cordovaVersion=4.2.1";
+  "https://app.wodify.com/Mobile/?isPhoneGap=True&uuid=1eb96512ff049337863ca8e0a1be9ed3aad85b1590dada74a9c4703059761ad1";
 
 export const todaysSchedule =
   "https://app.wodify.com/Mobile/Class_Schedule.aspx";
-
-export const signIn =
-  "https://app.wodify.com/Mobile/Class_Schedule.aspx?_ts=1582058673007";
 
 export const wodCookie = {
   DeviceUUID:
@@ -14,7 +11,14 @@ export const wodCookie = {
 };
 
 export const formData = {
-  wt51$wtMainContent$wtDate_Input: "02/19/2020",
-  wt51$wtMainContent$W_Utils_UI_wt41$block$wtDateInputFrom: "02/19/2020",
-  wt51$wtMainContent$wt125: 7518 // bowery gym id
+  __VIEWSTATE: "",
+  __EVENTARGUMENT: "",
+  wt51$Mobile_UI_wt21$block$wt13$wttxtuContent: "",
+  wt51$Mobile_UI_wt21$block$wt13$wttxtOnStart: "",
+  wt51$wtMainContent$wt125: 7518, // bowery gym id
+  wt51$wtMainContent$wt15: 23460 // CrossFit program
 };
+
+export const tmpFormValueFilename = "formValues.tmp.json";
+
+export const BOWERY_CROSSFIT_GYM_NAME = "BOWERY (285 GRAND ST, NY)";

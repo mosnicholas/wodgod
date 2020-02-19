@@ -1,7 +1,5 @@
-import { wodCookie } from "./constants";
-
-export default () =>
-  Object.entries(wodCookie).reduce(
-    (val, [key, value]) => `${val} ${key}=${value};`,
+export default obj =>
+  Object.entries(obj).reduce(
+    (val, [key, value]) => `${val}${key}=${value}; `,
     ""
   );
