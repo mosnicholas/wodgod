@@ -6,9 +6,8 @@
   "scripts": {
     "build": "babel src --out-dir build",
     "serve": "babel-node build/app.js",
-    "start": "nodemon --exec babel-node src/app.js",
-    "now-build": "npm run build",
-    "test": "test"
+    "start-dev": "nodemon --exec babel-node src/app.js",
+    "start": "node ./build/app.js"
   },
   "repository": {
     "type": "git",
