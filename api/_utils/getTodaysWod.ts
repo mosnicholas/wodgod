@@ -1,24 +1,7 @@
-import express from "express";
 import cheerio from "cheerio";
 import axios from "axios";
 
-const todaysWODUrl =
-  "https://app.wodify.com/Mobile/?isPhoneGap=True&uuid=1eb96512ff049337863ca8e0a1be9ed3aad85b1590dada74a9c4703059761ad1&device_platform=iOS&cordovaVersion=4.2.1";
-const todaysSchedule =
-  "https://app.wodify.com/Mobile/Class_Schedule.aspx?Date=01%2f01%2f1900";
-const signIn =
-  "https://app.wodify.com/Mobile/Class_Schedule.aspx?_ts=1582058673007";
-const todaysScheduleCookies = {
-  DeviceUUID:
-    "1eb96512ff049337863ca8e0a1be9ed3aad85b1590dada74a9c4703059761ad1",
-  IsPhoneGapClient: true
-};
-
-// GET For schedule
-// POST for reserve & sign in
-
-const app = express();
-const port = 3000;
+import { todaysWODUrl } from "./constants";
 
 const getTodaysWod = async () => {
   const result = await axios.get(todaysWODUrl);
@@ -66,9 +49,4 @@ const getTodaysWod = async () => {
   return wods;
 };
 
-app.get("/", async (req, res) => {
-  const todaysWod = await getTodaysWod();
-  return res.json(todaysWod);
-});
-
-app.listen(port, () => console.log(`WodGod is listening on port ${port}!`));
+export default getTodaysWod;
