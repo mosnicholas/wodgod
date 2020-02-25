@@ -1,5 +1,5 @@
-export default (obj: { [x: string]: string }) =>
+export default (obj: { [x: string]: string | number }) =>
   Object.entries(obj).reduce(
-    (val, [key, value]) => `${val}${key}=${escape(value || "")}&`,
+    (val, [key, value]) => `${val}${key}=${escape(value.toString() || "")}&`,
     ""
   );
