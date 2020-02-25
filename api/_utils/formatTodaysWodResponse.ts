@@ -58,12 +58,12 @@ const formatTodaysWodResponse = (todaysWod: WOD[]) => {
         imageUri:
           "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/crossfit-g-1556191957.jpg?crop=0.670xw:1.00xh;0,0&resize=480:*"
       }
-    })),
-    followupEventInput: {
-      name: "Do you want to book a class?",
-      languageCode: "en-US",
-      parameters: {}
-    }
+    }))
+    // followupEventInput: {
+    //   name: "Do you want to book a class?",
+    //   languageCode: "en-US",
+    //   parameters: {}
+    // }
   };
 };
 
