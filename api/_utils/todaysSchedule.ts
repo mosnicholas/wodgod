@@ -63,9 +63,7 @@ const getTodaysWod = async () => {
     };
   });
 
-  return {
-    fulfillmentText: "Hello"
-  };
+  return schedulesObject;
 };
 
 export default getTodaysWod;
