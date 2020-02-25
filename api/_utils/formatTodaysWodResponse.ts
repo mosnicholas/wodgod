@@ -59,8 +59,6 @@ const formatTodaysWodResponse = (todaysWod: WOD[]) => {
           "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/crossfit-g-1556191957.jpg?crop=0.670xw:1.00xh;0,0&resize=480:*"
       }
     })),
-    payload: {},
-    outputContexts: [],
     followupEventInput: {
       name: "Do you want to book a class?",
       languageCode: "en-US",
